@@ -1,2 +1,2 @@
 # Stm32f103_STD_Training
-Stm32f103ZET6 开发板标准库开发：模板文件-0520串口1printf重定向
+Stm32f103ZET6 开发板标准库开发：模板文件-0520串口1printf重定向：0520F103ZeTmplUsart1InterruptRxTxPrint
