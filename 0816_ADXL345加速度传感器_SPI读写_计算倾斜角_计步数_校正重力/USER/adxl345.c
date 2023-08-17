@@ -191,7 +191,7 @@ s32 X_axis_mg_Force,Y_axis_mg_Force,Z_axis_mg_Force;
 	//printf("To_write_X_axis_Offset:%d\r\n",To_write_X_axis_Offset);
 	
 
-
+ if (0 == adxl345_getRespont()) { ErrorInfo("adxl345_getRespont: error ");  return ; }//id:0XE5
 	
 //÷√¡„Offset ºƒ¥Ê∆˜
 	adxl345_WriteReg(  ADXL345_OFSX , 0X00 ) ;  
