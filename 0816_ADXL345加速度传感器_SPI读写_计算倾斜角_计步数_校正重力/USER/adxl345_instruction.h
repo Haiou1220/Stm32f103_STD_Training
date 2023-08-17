@@ -38,7 +38,15 @@
 #define DATA_FORMAT__FULL_RES  0x08 //全分辨率模式
 #define ADXL345_POWER_CTL__measurement     0x08 //测量使能
 #define	ADXL345_INT_ENABLE__data_read  0x80		//数据准备好中断使能		
+#define	ADXL345_INT_ENABLE__watermark ox02  //watermark 中断使能	
+#define	ADXL345_INT_ENABLE__overrun  0x01  //overrun 中断使能	
+//
+#define	ADXL345_INT_SOURCE__overrun		0x01 // overrun中断状态 	
 
 #define ADXL345_Axis_scale  3.9
+
+#define ADXL345_FIFO_CTL__passby_mode  0X00  //旁路 模式
+#define ADXL345_FIFO_CTL__fifo_mode 0X40  //fifo 模式
+#define ADXL345_FIFO_CTL__sample_num_16 0X0f  //fifo 模式 ,16 样本
 #endif
 

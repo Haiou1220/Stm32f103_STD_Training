@@ -4,7 +4,9 @@
 #include "systick.h"
 #include "adxl345_instruction.h"
 #include "stdio.h"
- 
+#include "global.h"
+
+
 void adxl345_init(void) //时序方案按照时钟 极性(CPOL)= 1、 时钟相位(CPHA)= 1执行。
 {
 	spi1_hard_init(3);
@@ -12,6 +14,11 @@ void adxl345_init(void) //时序方案按照时钟 极性(CPOL)= 1、 时钟相位(CPHA)= 1执行
 	//上电延时
 	sysTickDelay_ms(5);
 	
+	if( 0 == adxl345_getRespont() )
+	{
+		ErrorInfo( "adxl345_init erro,no respond");
+		return ;
+	}
 	//初始化序列
 	adxl345_WriteReg(  ADXL345_DATA_FORMAT , DATA_FORMAT__FULL_RES|DATA_FORMAT__Rang_16g  ) ;  //16g,全分辨率模式
 	
@@ -19,7 +26,7 @@ void adxl345_init(void) //时序方案按照时钟 极性(CPOL)= 1、 时钟相位(CPHA)= 1执行
 	adxl345_WriteReg(  ADXL345_OFSY , 0X00 ) ;   
 	adxl345_WriteReg(  ADXL345_OFSZ ,  0X00   ) ; 
 	
-	
+	adxl345_WriteReg(ADXL345_FIFO_CTL, ADXL345_FIFO_CTL__passby_mode     );//	//	旁路模式
 	
 	adxl345_WriteReg(  ADXL345_POWER_CTL  , ADXL345_POWER_CTL__measurement   ) ;//开始测量
 	
@@ -75,10 +82,12 @@ u8 adxl345_ReadReg(u8 reg_addr )  //
 }
 
 
-void adxl345_Buf_Read(u8 reg_addr ,u8* buf_byte_read,u8 count)  //  
+u8 adxl345_Buf_Read(u8 reg_addr ,u8* buf_byte_read,u8 count)  //  
 { 
 	 
 	 reg_addr &= 0x3f;//d7d6 清零
+	
+	 if (0 == adxl345_getRespont()) {  return 1; }//id:0XE5
 	
      spi_hard_CS(0);   //启动信号
 	 sysTickDelay_us_Block(5);//开始建立时间
@@ -94,10 +103,22 @@ void adxl345_Buf_Read(u8 reg_addr ,u8* buf_byte_read,u8 count)  //
 	 sysTickDelay_us_Block(5);//结束建立时间									
      spi_hard_CS(1) ;   //停止信号
 
-	return ;
+	return 0;
 }
 
+u8 adxl345_getRespont(void) //id:0XE5
+{
+ if( adxl345_ReadReg(ADXL345_DEVID) == 0XE5)
+ {	
+	 
+	return 1;
+ }else{
+	   
+	return 0;
+ }
 
+
+}
 
  s32 adxl345_axis_dataTransform(u8 data_low,u8 data_high) //d15-d12 高四位符号位，d11-d0 数据位   ，二进制补码，对负数处理：负号（取反加一）
 {
@@ -154,6 +175,7 @@ void stepping_occur_Z_axis(s32 Z_axis_gForce_mg,u32* step_num) //Z轴mg 发生上升 
 
 void adxl345_3axis_Offset_check( void) //字符测量xyz表示三轴, 计算并写入 偏差寄存器的值
 {
+	u8 while_count = 5;
 
 //传入 三轴的 mg 重力值
 
@@ -168,15 +190,30 @@ s32 X_axis_mg_Force,Y_axis_mg_Force,Z_axis_mg_Force;
 
 	//printf("To_write_X_axis_Offset:%d\r\n",To_write_X_axis_Offset);
 	
-	//关中断 //可以不需要，只要延时到达采样数据时间中断标志位即可
-		TIM_ITConfig(  TIM2,  TIM_IT_Update,  DISABLE);
 
+
+	
 //置零Offset 寄存器
 	adxl345_WriteReg(  ADXL345_OFSX , 0X00 ) ;  
 	adxl345_WriteReg(  ADXL345_OFSY , 0X00 ) ;   
 	adxl345_WriteReg(  ADXL345_OFSZ ,  0X00   ) ; 
-	sysTickDelay_ms(50);
-	//或者等待数据准备好中断
+ 
+ adxl345_Buf_Read(  ADXL345_DATAX0 ,  buf_byte_read_axis_xyz,  6) ;// 清除 DATA ready ,overrun 中断标志位
+ 
+	// 等待数据overrun中断
+while( !(adxl345_ReadReg(ADXL345_INT_SOURCE) & ADXL345_INT_SOURCE__overrun) )
+{ 
+	 
+	 sysTickDelay_ms(5);
+	while_count--;
+	if( !while_count    )
+	{	
+		ErrorInfo("adxl345_3axis_Offset_check:DATA ready error ");
+		return;
+	}
+
+}
+ 
 
 //读出
 	adxl345_Buf_Read(  ADXL345_DATAX0 ,  buf_byte_read_axis_xyz,  6) ;
@@ -185,7 +222,7 @@ s32 X_axis_mg_Force,Y_axis_mg_Force,Z_axis_mg_Force;
 		Z_axis_mg_Force = adxl345_axis_dataTransform(buf_byte_read_axis_xyz[4],buf_byte_read_axis_xyz[5])   ;
 		
 		
-	//停止测量
+//	//停止测量
 	adxl345_WriteReg(  ADXL345_POWER_CTL  , 0X00   ) ;// 停止测量
 	adxl345_WriteReg(  ADXL345_INT_ENABLE  , 0X00  ) ;// 停止使能数据准备好中断
 	
@@ -215,8 +252,7 @@ s32 X_axis_mg_Force,Y_axis_mg_Force,Z_axis_mg_Force;
 	adxl345_WriteReg(  ADXL345_INT_ENABLE  , ADXL345_INT_ENABLE__data_read   ) ;// 使能数据准备好中断
 
 
-	//关中断 //可以不需要，只要延时到达采样数据时间中断标志位即可
-		TIM_ITConfig(  TIM2,  TIM_IT_Update,  ENABLE);
+
 
 }
 
