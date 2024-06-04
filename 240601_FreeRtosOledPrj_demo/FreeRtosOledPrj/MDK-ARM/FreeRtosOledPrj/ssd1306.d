@@ -1,0 +1,30 @@
+freertosoledprj\ssd1306.o: ..\Drivers\oled\ssd1306.c
+freertosoledprj\ssd1306.o: ..\Drivers\oled\ssd1306.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
+freertosoledprj\ssd1306.o: ../Core/Inc/stm32f1xx_hal_conf.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_def.h
+freertosoledprj\ssd1306.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f1xx.h
+freertosoledprj\ssd1306.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/stm32f103xb.h
+freertosoledprj\ssd1306.o: ../Drivers/CMSIS/Include/core_cm3.h
+freertosoledprj\ssd1306.o: E:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+freertosoledprj\ssd1306.o: ../Drivers/CMSIS/Include/cmsis_version.h
+freertosoledprj\ssd1306.o: ../Drivers/CMSIS/Include/cmsis_compiler.h
+freertosoledprj\ssd1306.o: ../Drivers/CMSIS/Include/cmsis_armcc.h
+freertosoledprj\ssd1306.o: ../Drivers/CMSIS/Device/ST/STM32F1xx/Include/system_stm32f1xx.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/Legacy/stm32_hal_legacy.h
+freertosoledprj\ssd1306.o: E:\Program Files\Keil_v5\ARM\ARMCC\Bin\..\include\stddef.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_rcc_ex.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_gpio_ex.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_exti.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_dma_ex.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_cortex.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_flash_ex.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_i2c.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_pwr.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim.h
+freertosoledprj\ssd1306.o: ../Drivers/STM32F1xx_HAL_Driver/Inc/stm32f1xx_hal_tim_ex.h
