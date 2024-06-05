@@ -1,0 +1,34 @@
+
+一.把所有源码 以及与硬件平台相关的文件复制到项目工程,配置好头文件路径.
+二.拷贝demo 的FreeRtosconfig.h 配置好头文件
+三.实现 PendSV_Handler  与 SVC_Handler .
+SVC_Handler 是一个中断处理函数，用于处理 SVC（Supervisor Call）异常,
+SVC 异常通常用于从用户模式（如果 Cortex-M 控制器支持的话）切换到特权模式（如 SVCall 处理程序通常运行在特权模式）
+来执行某些需要更高权限的操作。PendSV_Handler是一个中断处理函数，专门用于处理PendSV（Pending Supervisor Call）中断。
+在ARM Cortex-M架构中，PendSV中断是一种特殊的软件中断，通常用于操作系统或实时操作系统（RTOS）中的任务切换。
+它主要负责在任务切换时保存和恢复任务上下文。
+PendV_Handler与SVC_Handler FreeRTOS已经实现了:xPortPendSVHandler()与vPortSVChandler() ,需要define 替换原来的. ok
+
+这里只是为了把系统跑起来，所以只移植了核心组件。我们需要移植的，最少的文件只需要：
+FreeRTOSv202107.00\FreeRTOS\Source\tasks.c, queue.c and list.c 3个文件(kernel核心)
+FreeRTOSv202107.00\FreeRTOS\Source\portable\RVDS\ARM_CM3\port.c + portmacro.h(3个中断都是在这里做的，pendSV,SVC,tick)
+FreeRTOSv202107.00\FreeRTOS\Source\portable\MemMang\heap_4.c(内存管理，5中选1)
+FreeRTOSv202107.00\FreeRTOS\Source\include 所有API接口
+FreeRTOSv202107.00\FreeRTOS\Demo\CORTEX_STM32F103_Keil\FreeRTOSConfig.h(freeRTOS系统裁剪配置文件)
+
+del ???FreeRTOS 已经实现了 SysTick的启动的配置:vPortSetupTimerInterrupt();???
+FreeRTOS 已经实现了 SysTick中断服务函数:xPortsysTickHandler(); ok
+
+stm32中断文件修改 void SysTick_Handler(void) 条件调用xPortsysTickHandler()
+ if(xTaskGetSchedulerState()!=taskSCHEDULER_NOT_STARTED)//系统已经运行=》就调用
+ 启用选项 #define  INCLUDE_xTaskGetSchedulerState 1 
+ 引用相关头文件FreeRtos.h task.h 必须这个循序包含头文件,不然报错
+
+
+四.配置总堆栈大小
+FreeRTOSConfig.h中的configTOTAL_HEAP_SIZE（size_t)(10*1024)。
+其中20代表STM32F10x系列的堆栈大小，需要按照型号修改匹配。20为ZET6，10为C8T6。
+STM32F103C8T6:ram 20KB ,STM32F103ZET6:ram:64 KB
+
+五.FreeRtos实现任务调度,必须依赖系统中断SysTickHandle, 在HAL库生成工程的时候,HAL的软件定时器HalDelay或者HALTick的时基源是默认为SysTick,
+为了减少冲突,需要更改HALTick的时基源为其他硬件定时器.而FreeRtos就能独享SysTick.

@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "MAIN.C": "cpp",
+        "system_error": "c",
+        "i2c.h": "c",
+        "font.h": "c",
+        "ssd1306.h": "c",
+        "stm32f10x_it.h": "c",
+        "stm32f10x.h": "c",
+        "portmacro.h": "c",
+        "task.h": "c"
+    },    
+    "files.encoding": "utf8",  
+    "files.autoGuessEncoding": false // 如果你希望 VS Code 总是使用 UTF-8 而不是猜测编码，可以设置为 false  
+}
+
