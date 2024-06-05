@@ -1,2 +1,5 @@
 # Stm32f103_STD_Training
-Stm32f103ZET6 开发板标准库开发：模板文件-0520串口1printf重定向：0520F103ZeTmplUsart1InterruptRxTxPrint
+一.Stm32f103ZET6 开发板标准库开发：模板文件-0520串口1printf重定向：0520F103ZeTmplUsart1InterruptRxTxPrint
+二.f103ZET6 移植 f103c8t6步骤:1.更改设备Device型号为f103c8t6 2.修改宏定义为STM32F10X_MD,USE_STDPERIPH_DRIVER
+3.更换启动文件为startup_stm32f10x_md.s 
+
