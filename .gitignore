@@ -1,6 +1,27 @@
+.gitignore
+
+0520F103ZeTmplUsart1InterruptRxTxPrint/
+0520F103ZeTmplUsart1InterruptRxTxPrint/USER/My103ZeTemplate.uvguix.Haiou
+0520F103ZeTmplUsart1InterruptRxTxPrint/USER/My103ZeTemplate.uvoptx
+
 0730_iic硬件iic软件读取8b和15bAddrE2p读取AHT10温湿度/
 0812_SPI硬件读写W25Q128扇区读写整型数据存储/
 0922_OLED096中文英文字模显示硬件I2C/
+0922_OLED096中文英文字模显示硬件I2C/
 240524_ssd1306驱动/
+
+240604_TB6600两相驱动42步1.8步距/
+240601_FreeRtosOledPrj_demo/
+240601_STD_ssd1306_demo/
+240601_StdFreeRtosOledPrj_demo/
+
+Flash编程/
+STM32 V3.4固件库使用方法实例修订版.doc
+Stm32寄存器与库函数概览(摘自固件库使用手册).doc
+
+
+
+
+
 
 
