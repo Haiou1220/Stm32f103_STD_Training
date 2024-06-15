@@ -14,14 +14,60 @@
 240601_FreeRtosOledPrj_demo/
 240601_STD_ssd1306_demo/
 240601_StdFreeRtosOledPrj_demo/
+240607_StdOsPrj_keyBtn/
+
 
 Flash编程/
 STM32 V3.4固件库使用方法实例修订版.doc
 Stm32寄存器与库函数概览(摘自固件库使用手册).doc
+PM0056_Programming manual.pdf
 
 
 
 
 
 
+#忽略所有编译过程产生的文件
+#中间文件
+*.o
+#链接阶段文件
+*.axf
+*.elf
+#最终文件
+*.hex
+*.bin
+#交叉引用文件\列表文件\映射文件\依赖文件
+*.crf
+*.lst
+*.map
+*.dep
+*.d
+#其他文件
+*.bak
+*.ddk
+*.edk
+*.lnp
+*.mpf
+*.mpj
+*.obj
+*.omf
+*.plg
+*.rpt
+*.tmp
+*.__i
+*.tra
+JLinkLog.txt
+*.iex
+*.htm
+*.sct
+#keil 工程相关
+#uvprojx 文件就是我们平时双击打开的工程文件，它记录了整个工程的结构，如芯片类型、工程包含了哪些源文件等内容
+#*.uvprojx 要跟踪,删除无法打开
+#uvoptx 文件记录了工程的配置选项，如下载器的类型、变量跟踪配置、断点位置以及当前已打开的文件等等；
+#*.uvoptx 要跟踪,非必须
+#uvguix 文件记录了MDK软件的GUI布局，如代码编辑区窗口的大小、编译输出提示窗口的位置等等。
+*.uvguix.Haiou
+*.Haiou
+My103Template.uvguix.Haiou
 
+240612_StdOsOledBtn_temp/USER/My103Template.uvguix.Haiou
