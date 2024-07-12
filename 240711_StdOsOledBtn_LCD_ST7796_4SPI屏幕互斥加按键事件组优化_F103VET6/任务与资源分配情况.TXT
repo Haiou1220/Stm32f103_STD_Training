@@ -1,0 +1,30 @@
+任务:
+oled_task,
+led_task,
+usart1_task,
+key_task,
+st7796_task,
+
+资源分配
+key模块:
+   PB0  
+led模块:
+    PC0 //开发板F103VET6
+oled模块:	
+    PB6 ------> I2C1_SCL
+    PB7 ------> I2C1_SDA	
+usart1模块:
+   pa9  --> tx
+   pa10 -->  rx
+
+st7796_spi_lcd模块:
+SPI1
+PA4 -NSS 
+PA5-SCK  
+PA6-MI 
+PA7-MO  
+PA3 - DC  
+PA2 - reset
+
+
+
