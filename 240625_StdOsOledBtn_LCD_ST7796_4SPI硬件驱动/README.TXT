@@ -16,3 +16,4 @@ ST7796与128*64oled屏 驱动的区别,字体取模方式可一样,但是ST7796�
 key_task 按键事件回调函数的优化:使用发送信号量到对应的task处理事件,不要阻塞按键事件回调函数的返回
 
 *** error:file:..\HARDWARE\spi\spi.c,line:33 SPI_I2S_GetFlagStatus(SPI1, SPI_I2S_FLAG_RXNE) 超时,需要互斥锁解决资源竞争
+ps:ST7789(ST7796 好像是)这款LCD的FPC设计上读信号没引出来,所以不能读ID,虽然数据手册上有说明读ID的功能.
