@@ -1,0 +1,21 @@
+任务:
+oled_task,
+led_task,
+usart1_task,
+key_task,
+
+
+资源分配
+key模块:
+   PB0  
+led模块:
+    PC13
+oled模块:	
+    PB6 ------> I2C1_SCL
+    PB7 ------> I2C1_SDA	
+usart1模块:
+   pa9  --> tx
+   pa10 -->  rx
+
+
+
