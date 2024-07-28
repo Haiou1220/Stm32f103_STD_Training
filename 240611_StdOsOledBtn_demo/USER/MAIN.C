@@ -119,7 +119,7 @@ void start_task(void *argv)
 void oled_task(void *argv)
 {
 	uint32_t len = 0;
-	char str_temp[20];
+	//char str_temp[20];
 	uint32_t line0_1;
 	taskENTER_CRITICAL();
 	OLED_bsp_init();
