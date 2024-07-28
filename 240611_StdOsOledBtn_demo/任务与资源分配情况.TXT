@@ -1,3 +1,6 @@
+芯片：stm32f103c8t6   
+c:48脚 ;8:64k byte flash  中容量; 20kB SRAM
+				
 任务:
 oled_task,
 led_task,
