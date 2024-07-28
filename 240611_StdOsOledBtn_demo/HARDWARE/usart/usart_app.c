@@ -11,8 +11,8 @@ void usart1_task(void *argv)
 	usart1_init(115200); // pa9 tx,  pa10 rx
 	while (1)
 	{
-		vTaskDelay(pdMS_TO_TICKS(1000));
-		//print("IN usart1_task:%d\r\n",count++);		
+		vTaskDelay(pdMS_TO_TICKS(2000));
+		print("IN usart1_task:%d\r\n",count++);		
 	}
 }
 
