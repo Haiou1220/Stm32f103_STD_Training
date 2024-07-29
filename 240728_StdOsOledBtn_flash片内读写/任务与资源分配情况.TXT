@@ -1,0 +1,28 @@
+芯片: stm32f103c8t6   
+c:48脚 ;8:64k byte flash  中容量; 20kB SRAM
+
+KEIL配置:
+IROM1: start:0x0800 0000 size:0x1 0000(64KB)
+IRAM1: start:0x2000 0000 size:0x0 5000(20KB)
+
+任务:
+oled_task,
+led_task,
+usart1_task,
+key_task,
+flash_internal_task,(flash片内读写操作)
+
+资源分配
+key模块:
+   PB0  
+led模块:
+    PC13
+oled模块:	
+    PB6 ------> I2C1_SCL
+    PB7 ------> I2C1_SDA	
+usart1模块:
+   pa9  --> tx
+   pa10 -->  rx
+
+
+
