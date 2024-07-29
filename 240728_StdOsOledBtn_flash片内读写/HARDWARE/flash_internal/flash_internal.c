@@ -187,7 +187,7 @@ void FLASHSTM_Write(u32 WriteAddr,u16 *pBuffer,u16 len)
             page_off = 0;              // 偏移位置为0
             pBuffer += to_write_page_remain_num;    // 指针偏移
             WriteAddr += to_write_page_remain_num;  // 写地址偏移
-            ToWriteCount -= to_write_page_remain_num; // byteToWriteCount递减
+            ToWriteCount -= to_write_page_remain_num; // ToWriteCount递减
 
             if (ToWriteCount > FLASH_STM_PAGE_SIZE/2)
                 to_write_page_remain_num = FLASH_STM_PAGE_SIZE/2; // 下一个页区还是写不完
