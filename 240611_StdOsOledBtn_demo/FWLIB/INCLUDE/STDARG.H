@@ -3,14 +3,14 @@
 /* Copyright (C) ARM Ltd., 1991-1999. All rights reserved */
 
 /*
- * RCS $Revision: 185525 $
- * Checkin $Date: 2014-05-29 12:44:48 +0100 (Thu, 29 May 2014) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: agrant $
  */
 
 #ifndef __stdarg_h
 #define __stdarg_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
   #ifndef __STDARG_DECLS
   #define __STDARG_DECLS
@@ -100,7 +100,7 @@
 
 #define __va_copy(dest, src) ((void)((dest) = (src)))
 
-#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
    /* va_copy is in C99 and non-strict C90 and non-strict C++
     * __va_copy is always present.
     */

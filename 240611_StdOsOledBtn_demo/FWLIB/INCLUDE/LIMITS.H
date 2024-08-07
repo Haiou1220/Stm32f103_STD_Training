@@ -3,14 +3,14 @@
 /* Copyright 1991-1997 ARM Limited. All rights reserved         */
 
 /*
- * RCS $Revision: 185525 $
- * Checkin $Date: 2014-05-29 12:44:48 +0100 (Thu, 29 May 2014) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: drodgman $
  */
 
 #ifndef __limits_h
 #define __limits_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 #define CHAR_BIT 8
     /* max number of bits for smallest object that is not a bit-field (byte) */
@@ -75,7 +75,7 @@ extern const int __aeabi_MB_LEN_MAX;
   #define ULONG_MAX 0xffffffffUL
 #endif
     /* maximum value for an object of type unsigned long int */
-#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
   #define LLONG_MIN  (~0x7fffffffffffffffLL)
       /* minimum value for an object of type long long int */
   #define LLONG_MAX    0x7fffffffffffffffLL

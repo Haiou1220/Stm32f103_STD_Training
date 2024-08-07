@@ -2,8 +2,8 @@
 /* All rights reserved */
 
 /*
- * RCS $Revision: 185525 $
- * Checkin $Date: 2014-05-29 12:44:48 +0100 (Thu, 29 May 2014) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: agrant $
  */
 
@@ -11,14 +11,14 @@
 
 #ifndef __inttypes_h
 #define __inttypes_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 #define _ARMABI __declspec(__nothrow)
 #define _ARMABI_PURE __declspec(__nothrow) __attribute__((const))
 
 #include <stdint.h>
 
-#if !defined(__cplusplus) || defined(__STDC_FORMAT_MACROS)
+#if !defined(__cplusplus) || defined(__STDC_FORMAT_MACROS) || 201103L <= __cplusplus
 
 #ifdef __LP64__
   #define __PRISCN64 "l" /* 'int64_t' is 'long' */

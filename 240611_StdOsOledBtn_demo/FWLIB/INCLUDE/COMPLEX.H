@@ -2,15 +2,15 @@
  * complex.h: ISO/IEC 9899:1999 (C99), section 7.3 
  *
  * Copyright (C) ARM Ltd., 2006. All rights reserved 
- * RCS $Revision: 179217 $
- * Checkin $Date: 2013-03-12 14:03:19 +0000 (Tue, 12 Mar 2013) $
- * Revising $Author: kwalker $
+ * RCS $Revision$
+ * Checkin $Date$
+ * Revising $Author$
  */
 
 #if __STDC_VERSION__ < 199901L && !defined(__GNUC__)
 #  error complex.h requires c99 mode or gnu mode
 #endif
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 /*
   In order to get the float, double, and long double versions

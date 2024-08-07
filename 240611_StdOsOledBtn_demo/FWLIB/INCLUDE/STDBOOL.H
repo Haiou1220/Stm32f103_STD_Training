@@ -2,14 +2,14 @@
 
 /* Copyright (C) ARM Ltd., 2002
  * All rights reserved
- * RCS $Revision: 177844 $
- * Checkin $Date: 2012-11-21 11:51:12 +0000 (Wed, 21 Nov 2012) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: drodgman $
  */
 
 #ifndef __bool_true_false_are_defined
 #define __bool_true_false_are_defined 1
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
   #ifndef __cplusplus /* In C++, 'bool', 'true' and 'false' and keywords */
     #define bool _Bool

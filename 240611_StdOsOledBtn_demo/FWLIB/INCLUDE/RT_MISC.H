@@ -2,14 +2,14 @@
  *
  * Copyright 1999,2013-2014 ARM Limited. All rights reserved.
  *
- * RCS $Revision: 185914 $
- * Checkin $Date: 2014-06-24 07:41:38 +0100 (Tue, 24 Jun 2014) $
- * Revising $Author: petpav01 $
+ * RCS $Revision$
+ * Checkin $Date$
+ * Revising $Author$
  */
 
 #ifndef __RT_MISC_H
 #define __RT_MISC_H
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 #ifdef __cplusplus
 extern "C" {
@@ -74,7 +74,7 @@ __rt_lib_init(unsigned /*heapbase*/, unsigned /*heaptop*/);
  * special circumstances, you might need to redefine this function
  * explicitly yourself.
  */
-__value_in_regs struct __argc_argv __ARM_get_argv(void */*internal use only*/);
+__value_in_regs struct __argc_argv __ARM_get_argv(void * /*internal use only*/);
 
 /*
  * This is the library shutdown function, analogous to

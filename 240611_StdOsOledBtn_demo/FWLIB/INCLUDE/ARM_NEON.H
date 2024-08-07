@@ -4,10 +4,10 @@
  *
  * Copyright 2005 ARM Limited. All rights reserved.
  *
- * RCS $Revision: 185729 $
- * Checkin $Date: 2014-06-12 17:04:12 +0100 (Thu, 12 Jun 2014) $
- * Revising $Author: ransin01 $
- * $Id: arm_neon.h 185729 2014-06-12 16:04:12Z ransin01 $
+ * RCS $Revision$
+ * Checkin $Date$
+ * Revising $Author$
+ * $Id$
  * $URL: $
  *
  * Note: this file is auto-generated from neon_intrinsics_spec.xml

@@ -2,14 +2,14 @@
  *
  * Copyright 1999 ARM Limited. All rights reserved.
  *
- * RCS $Revision: 186240 $
- * Checkin $Date: 2014-07-21 14:49:32 +0100 (Mon, 21 Jul 2014) $
- * Revising $Author: petpav01 $
+ * RCS $Revision$
+ * Checkin $Date$
+ * Revising $Author$
  */
 
 #ifndef __RT_FP_H
 #define __RT_FP_H
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 #ifdef __cplusplus
 extern "C" {

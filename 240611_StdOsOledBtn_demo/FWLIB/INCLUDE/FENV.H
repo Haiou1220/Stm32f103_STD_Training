@@ -2,14 +2,14 @@
  *
  * Copyright 1998 ARM Limited. All rights reserved.
  *
- * RCS $Revision: 185525 $
- * Checkin $Date: 2014-05-29 12:44:48 +0100 (Thu, 29 May 2014) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: drodgman $
  */
 
 #ifndef __fenv_h
 #define __fenv_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 /*
  * Depending on compiler version __int64 or __INT64_TYPE__ should be defined.

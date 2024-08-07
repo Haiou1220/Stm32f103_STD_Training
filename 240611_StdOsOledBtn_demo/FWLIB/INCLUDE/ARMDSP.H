@@ -2,9 +2,9 @@
  *
  * Copyright 2001 ARM Limited. All rights reserved.
  *
- * RCS $Revision: 178362 $
- * Checkin $Date: 2013-01-10 16:08:02 +0000 (Thu, 10 Jan 2013) $
- * Revising $Author: pwright $
+ * RCS $Revision$
+ * Checkin $Date$
+ * Revising $Author$
  */
 
 /* ----------------------------------------------------------------------
@@ -21,7 +21,7 @@
 
 #ifndef ARMDSP_ARMDSP_H
 #define ARMDSP_ARMDSP_H
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 #ifndef ARMDSP_WORD32_DEFINED
 #define ARMDSP_WORD32_DEFINED

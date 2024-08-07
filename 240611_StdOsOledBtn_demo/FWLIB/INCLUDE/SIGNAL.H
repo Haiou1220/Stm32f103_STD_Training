@@ -3,8 +3,8 @@
  * Copyright (C) Codemist Ltd., 1988-1993.
  * Copyright 1991-1999 ARM Limited. All rights reserved.
  *
- * RCS $Revision: 177844 $
- * Checkin $Date: 2012-11-21 11:51:12 +0000 (Wed, 21 Nov 2012) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: statham $
  */
 
@@ -16,7 +16,7 @@
 
 #ifndef __signal_h
 #define __signal_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
   #ifndef __SIGNAL_DECLS
   #define __SIGNAL_DECLS

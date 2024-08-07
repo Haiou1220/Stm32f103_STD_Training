@@ -2,14 +2,14 @@
 
 /* Copyright (C) ARM Ltd., 2006
  * All rights reserved
- * RCS $Revision: 177844 $
- * Checkin $Date: 2012-11-21 11:51:12 +0000 (Wed, 21 Nov 2012) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: statham $
  */
 
 #ifndef __tgmath_h
 #define __tgmath_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 #include <math.h>
 

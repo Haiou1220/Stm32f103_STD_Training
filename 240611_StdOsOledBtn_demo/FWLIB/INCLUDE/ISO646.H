@@ -3,15 +3,15 @@
 
 /*
  * Copyright ARM Ltd, 1999. All rights reserved.
- * RCS $Revision: 182176 $
- * Checkin $Date: 2013-10-07 19:06:18 +0100 (Mon, 07 Oct 2013) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: drodgman $
  */
 
 
 #ifndef __iso646_h
 #define __iso646_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 #ifndef __cplusplus
 #define and    &&

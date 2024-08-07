@@ -1,14 +1,14 @@
 /* wchar.h: C99 header */
 /* Copyright 2002 ARM Limited. All rights reserved.            */
 /*
- * RCS $Revision: 185525 $
- * Checkin $Date: 2014-05-29 12:44:48 +0100 (Thu, 29 May 2014) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: agrant $
  */
 
 #ifndef __wchar_h
 #define __wchar_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 #define _ARMABI __declspec(__nothrow)
 
@@ -211,6 +211,24 @@
     size_t wcsrtombs(char * __restrict /*dst*/,
                      const wchar_t ** __restrict /*src*/,
                      size_t /*len*/, mbstate_t * __restrict /*ps*/) __attribute__((__nonnull__(2)));
+    size_t _mbsnrtowcs(wchar_t * __restrict /*dst*/,
+                       const char ** __restrict /*src*/,
+                       size_t /*nmb*/,
+                       size_t /*len*/, mbstate_t * __restrict /*ps*/) __attribute__((__nonnull__(2)));
+    size_t _wcsnrtombs(char * __restrict /*dst*/,
+                       const wchar_t ** __restrict /*src*/,
+                       size_t /*nwc*/,
+                       size_t /*len*/, mbstate_t * __restrict /*ps*/) __attribute__((__nonnull__(2)));
+#if !defined(__STRICT_ANSI__)
+    size_t mbsnrtowcs(wchar_t * __restrict /*dst*/,
+                      const char ** __restrict /*src*/,
+                      size_t /*nmb*/,
+                      size_t /*len*/, mbstate_t * __restrict /*ps*/) __attribute__((__nonnull__(2)));
+    size_t wcsnrtombs(char * __restrict /*dst*/,
+                      const wchar_t ** __restrict /*src*/,
+                      size_t /*nwc*/,
+                      size_t /*len*/, mbstate_t * __restrict /*ps*/) __attribute__((__nonnull__(2)));
+#endif
 
     /*
      * Wide-character string-to-number conversions. Parallel to strto*.
@@ -218,11 +236,11 @@
     double wcstod(const wchar_t * /*nptr*/, wchar_t ** /*endptr*/) __attribute__((__nonnull__(1)));
     float wcstof(const wchar_t * /*nptr*/, wchar_t ** /*endptr*/) __attribute__((__nonnull__(1)));
     long double wcstold(const wchar_t * /*nptr*/, wchar_t ** /*endptr*/) __attribute__((__nonnull__(1)));
-    long int wcstol(const wchar_t * /*nptr*/, wchar_t **/*endptr*/,
+    long int wcstol(const wchar_t * /*nptr*/, wchar_t ** /*endptr*/,
                     int /*base*/) __attribute__((__nonnull__(1)));
     unsigned long int wcstoul(const wchar_t * /*nptr*/,
                               wchar_t ** /*endptr*/, int /*base*/) __attribute__((__nonnull__(1)));
-#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
     long long int wcstoll(const wchar_t * __restrict /*nptr*/,
                           wchar_t ** __restrict /*endptr*/, int /*base*/) __attribute__((__nonnull__(1)));
     unsigned long long int wcstoull(const wchar_t * __restrict /*nptr*/,
@@ -266,12 +284,10 @@
     wchar_t *wcstok(wchar_t * __restrict /*s1*/,
                     const wchar_t * __restrict /*s2*/,
                     wchar_t ** __restrict /*ptr*/) __attribute__((__nonnull__(2,3)));
-    wchar_t *wmemchr(const wchar_t * __restrict /*s*/, wchar_t /*c*/,
-                     size_t /*n*/) __attribute__((__nonnull__(1)));
     size_t wcslen(const wchar_t * __restrict /*s*/) __attribute__((__nonnull__(1)));
     wchar_t *wmemset(wchar_t * __restrict /*s*/, wchar_t /*c*/, size_t /*n*/) __attribute__((__nonnull__(1)));
 
-#ifdef __cplusplus
+#if defined(__cplusplus) && !defined(__ARMCOMPILER_LIBCXX)
     /*
      * C++'s overloading allows us to provide versions of these
      * functions which search a const string and return a const
@@ -284,6 +300,8 @@
     const wchar_t *wcsrchr(const wchar_t * __restrict /*s*/, wchar_t /*c*/) __attribute__((__nonnull__(1)));
     const wchar_t *wcsstr(const wchar_t * __restrict /*s1*/,
                           const wchar_t * __restrict /*s2*/) __attribute__((__nonnull__(1,2)));
+    const wchar_t *wmemchr(const wchar_t * __restrict /*s*/, wchar_t /*c*/,
+                           size_t /*n*/) __attribute__((__nonnull__(1)));
 #ifndef __WCHAR_DISABLED
     extern "C++" wchar_t *wcschr(wchar_t * __restrict __s, wchar_t __c) __attribute__((__nonnull__(1)));
     extern "C++" inline wchar_t *wcschr(wchar_t * __restrict __s, wchar_t __c)
@@ -299,6 +317,11 @@
     extern "C++" inline wchar_t *wcsstr(wchar_t * __restrict __s1,
                           const wchar_t * __restrict __s2)
       { return const_cast<wchar_t *>(wcsstr(const_cast<const wchar_t *>(__s1), __s2)); }
+    extern "C++" wchar_t *wmemchr(wchar_t * __restrict __s, wchar_t __c,
+                                  size_t __n) __attribute__((__nonnull__(1)));
+    extern "C++" inline wchar_t *wmemchr(wchar_t * __restrict __s, wchar_t __c,
+                                  size_t __n)
+    { return const_cast<wchar_t *>(wmemchr(const_cast<const wchar_t *>(__s), __c, __n)); }
 #endif
 #else
     /*
@@ -309,12 +332,24 @@
      * renders them unable to spot a lot of the possible error
      * cases.
      */
+#if defined(__cplusplus) && defined(__ARMCOMPILER_LIBCXX)
+  }  /* extern "C" */
+  }  /* namespace std */
+  extern "C" {
+#endif
     wchar_t *wcschr(const wchar_t * __restrict /*s*/, wchar_t /*c*/) __attribute__((__nonnull__(1)));
     wchar_t *wcspbrk(const wchar_t * __restrict /*s1*/,
                      const wchar_t * __restrict /*s2*/) __attribute__((__nonnull__(1,2)));
     wchar_t *wcsrchr(const wchar_t * __restrict /*s*/, wchar_t /*c*/) __attribute__((__nonnull__(1)));
     wchar_t *wcsstr(const wchar_t * __restrict /*s1*/,
                     const wchar_t * __restrict /*s2*/) __attribute__((__nonnull__(1,2)));
+    wchar_t *wmemchr(const wchar_t * __restrict /*s*/, wchar_t /*c*/,
+                     __CLIBNS size_t /*n*/) __attribute__((__nonnull__(1)));
+#if defined(__cplusplus) && defined(__ARMCOMPILER_LIBCXX)
+  }  /* extern "C" */
+  namespace std {
+  extern "C" {
+#endif
 #endif
 
     #ifdef __cplusplus
@@ -366,15 +401,21 @@
       using ::std::wcrtomb;
       using ::std::mbsrtowcs;
       using ::std::wcsrtombs;
+      using ::std::_mbsnrtowcs;
+      using ::std::_wcsnrtombs;
+#if !defined(__STRICT_ANSI__)
+      using ::std::mbsnrtowcs;
+      using ::std::wcsnrtombs;
+#endif
       using ::std::wcstod;
       using ::std::wcstof;
       using ::std::wcstold;
       using ::std::wcstol;
       using ::std::wcstoul;
-#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
       using ::std::wcstoll;
       using ::std::wcstoull;
-#endif /* !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) */
+#endif /* !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus) */
       using ::std::wcscpy;
       using ::std::wcsncpy;
       using ::std::wmemcpy;
@@ -388,14 +429,16 @@
       using ::std::wcscoll;
       using ::std::wcsxfrm;
       using ::std::wmemcmp;
+#if defined(__cplusplus) && !defined(__ARMCOMPILER_LIBCXX)
       using ::std::wcschr;
-      using ::std::wcscspn;
       using ::std::wcspbrk;
       using ::std::wcsrchr;
-      using ::std::wcsspn;
       using ::std::wcsstr;
-      using ::std::wcstok;
       using ::std::wmemchr;
+#endif /* defined(__cplusplus) && !defined(__ARMCOMPILER_LIBCXX) */
+      using ::std::wcscspn;
+      using ::std::wcsspn;
+      using ::std::wcstok;
       using ::std::wcslen;
       using ::std::wmemset;
 #if !defined(__STRICT_ANSI__) && !defined(__ARM_WCHAR_NO_IO)

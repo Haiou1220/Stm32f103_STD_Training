@@ -4,14 +4,14 @@
 /* version 0.03 */
 
 /*
- * RCS $Revision: 185525 $
- * Checkin $Date: 2014-05-29 12:44:48 +0100 (Thu, 29 May 2014) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: drodgman $
  */
 
 #ifndef __locale_h
 #define __locale_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 #define _ARMABI __declspec(__nothrow)
 
@@ -243,37 +243,37 @@ struct __aeabi_lconv {
 
     union {
         char __int_p_cs_precedes;
-#if !defined(int_p_cs_precedes) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+#if !defined(int_p_cs_precedes) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
         char int_p_cs_precedes;
 #endif
     };
     union {
         char __int_n_cs_precedes;
-#if !defined(int_n_cs_precedes) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+#if !defined(int_n_cs_precedes) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
         char int_n_cs_precedes;
 #endif
     };
     union {
         char __int_p_sep_by_space;
-#if !defined(int_p_sep_by_space) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+#if !defined(int_p_sep_by_space) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
         char int_p_sep_by_space;
 #endif
     };
     union {
         char __int_n_sep_by_space;
-#if !defined(int_n_sep_by_space) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+#if !defined(int_n_sep_by_space) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
         char int_n_sep_by_space;
 #endif
     };
     union {
         char __int_p_sign_posn;
-#if !defined(int_p_sign_posn) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+#if !defined(int_p_sign_posn) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
         char int_p_sign_posn;
 #endif
     };
     union {
         char __int_n_sign_posn;
-#if !defined(int_n_sign_posn) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+#if !defined(int_n_sign_posn) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
         char int_n_sign_posn;
 #endif
     };

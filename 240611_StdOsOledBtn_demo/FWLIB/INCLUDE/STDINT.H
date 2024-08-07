@@ -2,14 +2,14 @@
 /* All rights reserved */
 
 /*
- * RCS $Revision: 185525 $
- * Checkin $Date: 2014-05-29 12:44:48 +0100 (Thu, 29 May 2014) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: agrant $
  */
 
 #ifndef __stdint_h
 #define __stdint_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
   #ifdef __INT64_TYPE__
     /* armclang predefines '__INT64_TYPE__' and '__INT64_C_SUFFIX__' */
@@ -187,9 +187,9 @@ typedef unsigned     __LONGLONG uintmax_t;
 
     /* maximum value of pointer-holding unsigned integer type */
 #if __sizeof_ptr == 8
-#define UINTPTR_MAX INT64_MAX
+#define UINTPTR_MAX UINT64_MAX
 #else
-#define UINTPTR_MAX INT32_MAX
+#define UINTPTR_MAX UINT32_MAX
 #endif
 
     /* 7.18.2.5 */

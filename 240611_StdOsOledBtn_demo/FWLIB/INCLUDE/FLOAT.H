@@ -4,14 +4,14 @@
 /* version 0.01 */
 
 /*
- * RCS $Revision: 177844 $
- * Checkin $Date: 2012-11-21 11:51:12 +0000 (Wed, 21 Nov 2012) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: drodgman $
  */
 
 #ifndef __float_h
 #define __float_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
   #ifndef __FLOAT_DECLS
   #define __FLOAT_DECLS
@@ -52,7 +52,7 @@ extern unsigned __ieee_status(unsigned,unsigned); /* from fenv.h */
 #define DBL_MANT_DIG        53
 #define LDBL_MANT_DIG       53
     /* number of base-FLT_RADIX digits in the floating point mantissa */
-#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
 #define DECIMAL_DIG 17
     /* number of decimal digits that the widest floating point type
        can be rounded to and back again without changing the value */

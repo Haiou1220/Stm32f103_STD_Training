@@ -2,9 +2,9 @@
  *
  * Copyright 2001,2014 ARM Limited. All rights reserved.
  *
- * RCS $Revision: 185525 $
- * Checkin $Date: 2014-05-29 12:44:48 +0100 (Thu, 29 May 2014) $
- * Revising $Author: ransin01 $
+ * RCS $Revision$
+ * Checkin $Date$
+ * Revising $Author$
  */
 
 /* ----------------------------------------------------------------------
@@ -16,7 +16,7 @@
 
 #ifndef ARMDSP_DSPFNS_H
 #define ARMDSP_DSPFNS_H
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 #ifdef __cplusplus
 #define __STDC_LIMIT_MACROS 1

@@ -4,8 +4,8 @@
 /* version 0.04 */
 
 /*
- * RCS $Revision: 179217 $
- * Checkin $Date: 2013-03-12 14:03:19 +0000 (Tue, 12 Mar 2013) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: drodgman $
  */
 
@@ -28,7 +28,7 @@
 #ifndef __assert_h
 #   define __assert_h
 #define _ARMABI_NORETURN __declspec(__nothrow) __declspec(__noreturn)
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 #   ifndef __ARM_PROMISE
 #      define __ARM_PROMISE __promise
 #   endif

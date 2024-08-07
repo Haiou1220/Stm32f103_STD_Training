@@ -2,14 +2,14 @@
 /* Copyright 1999 ARM Limited. All rights reserved */
 
 /*
- * RCS $Revision: 185525 $
- * Checkin $Date: 2014-05-29 12:44:48 +0100 (Thu, 29 May 2014) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: drodgman $
  */
 
 #ifndef __alloca_h
 #define __alloca_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
   #ifndef __ALLOCA_DECLS
   #define __ALLOCA_DECLS

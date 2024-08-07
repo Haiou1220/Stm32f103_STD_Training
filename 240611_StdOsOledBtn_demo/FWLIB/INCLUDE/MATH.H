@@ -5,8 +5,8 @@
  */
 
 /*
- * RCS $Revision: 185525 $ Codemist 0.03
- * Checkin $Date: 2014-05-29 12:44:48 +0100 (Thu, 29 May 2014) $
+ * RCS $Revision$ Codemist 0.03
+ * Checkin $Date$
  * Revising $Author: statham $
  */
 
@@ -25,7 +25,7 @@
 
 #ifndef __math_h
 #define __math_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 #if defined(__clang__) || (defined(__ARMCC_VERSION) && !defined(__STRICT_ANSI__))
   /* armclang and non-strict armcc allow 'long long' in system headers */
@@ -40,7 +40,7 @@
  * you can use -D__USE_C99_MATH (or -D__USE_C99_ALL).
  */
 #ifndef __USE_C99_MATH
-  #if defined(__USE_C99_ALL) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+  #if defined(__USE_C99_ALL) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
     #define __USE_C99_MATH 1
   #endif
 #endif
@@ -781,7 +781,7 @@ _ARMDEFLD1(rint);
 
 #endif
 
-#ifdef __USE_C99_MATH
+#if (defined(__clang__) && !defined(__STRICT_ANSI)) || defined(__USE_C99_MATH)
 /*
  * Functions new in C99.
  */
@@ -839,15 +839,15 @@ extern _ARMABI __LONGLONG llroundf(float /*x*/);
 _ARMABI_INLINE _ARMABI __LONGLONG llroundl(long double __x) \
     { return llround((double)__x); }
 #endif
-extern _ARMABI_PURE double nan(const char */*tagp*/);
-extern _ARMABI_PURE float nanf(const char */*tagp*/);
+extern _ARMABI_PURE double nan(const char * /*tagp*/);
+extern _ARMABI_PURE float nanf(const char * /*tagp*/);
 #ifdef __HAVE_LONGDOUBLE
 _ARMABI_INLINE _ARMABI_PURE long double nanl(const char *__t) \
     { return (long double)nan(__t); }
 #endif
 #if defined(_WANT_SNAN) && defined(__SUPPORT_SNAN__)
-extern _ARMABI_PURE double nans(const char */*tagp*/);
-extern _ARMABI_PURE float nansf(const char */*tagp*/);
+extern _ARMABI_PURE double nans(const char * /*tagp*/);
+extern _ARMABI_PURE float nansf(const char * /*tagp*/);
 #ifdef __HAVE_LONGDOUBLE
 _ARMABI_INLINE _ARMABI_FPEXCEPT long double nansl(const char *__t) \
     { return (long double)nans(__t); }
@@ -856,8 +856,8 @@ _ARMABI_INLINE _ARMABI_FPEXCEPT long double nansl(const char *__t) \
 extern _ARMABI_FPEXCEPT double nearbyint(double /*x*/);
 extern _ARMABI_FPEXCEPT float nearbyintf(float /*x*/);
 _ARMDEFLD1(nearbyint);
-extern  double remquo(double /*x*/, double /*y*/, int */*quo*/);
-extern  float remquof(float /*x*/, float /*y*/, int */*quo*/);
+extern  double remquo(double /*x*/, double /*y*/, int * /*quo*/);
+extern  float remquof(float /*x*/, float /*y*/, int * /*quo*/);
 #ifdef __HAVE_LONGDOUBLE
 _ARMABI_INLINE long double remquol(long double __x, long double __y, int *__q) \
     { return (long double)remquo((double)__x, (double)__y, __q); }
@@ -877,7 +877,24 @@ _ARMDEFLD1(trunc);
 #undef _ARMDEFLD1P
 #undef _ARMDEFLD2
 
-#ifdef __cplusplus
+#if defined(__cplusplus) && ((!defined(__STRICT_ANSI__) || defined(__USE_C99_MATH)) || defined(__ARMCOMPILER_LIBCXX))
+  extern "C++" {
+    inline int (fpclassify)(double __x) { return fpclassify(__x); }
+    inline bool (isfinite)(double __x) { return isfinite(__x); }
+    inline bool (isgreater)(double __x, double __y) { return isgreater(__x, __y); }
+    inline bool (isgreaterequal)(double __x, double __y) { return isgreaterequal(__x, __y); }
+    inline bool (isinf)(double __x) { return isinf(__x); }
+    inline bool (isless)(double __x, double __y) { return isless(__x, __y); }
+    inline bool (islessequal)(double __x, double __y) { return islessequal(__x, __y); }
+    inline bool (islessgreater)(double __x, double __y) { return islessgreater(__x, __y); }
+    inline bool (isnan)(double __x) { return isnan(__x); }
+    inline bool (isnormal)(double __x) { return isnormal(__x); }
+    inline bool (isunordered)(double __x, double __y) { return isunordered(__x, __y); }
+
+  }
+#endif
+
+#if defined(__cplusplus) && !defined(__ARMCOMPILER_LIBCXX)
   extern "C++" {
     inline float abs(float __x)   { return fabsf(__x); }
     inline float acos(float __x)  { return acosf(__x); }
@@ -998,6 +1015,18 @@ _ARMDEFLD1(trunc);
     inline float tgamma(float __x) { return tgammaf(__x); }
     inline _ARMABI_FPEXCEPT float trunc(float __x) { return truncf(__x); }
 
+    inline int (fpclassify)(float __x) { return fpclassify(__x); }
+    inline bool (isfinite)(float __x) { return isfinite(__x); }
+    inline bool (isgreater)(float __x, float __y) { return isgreater(__x, __y); }
+    inline bool (isgreaterequal)(float __x, float __y) { return isgreaterequal(__x, __y); }
+    inline bool (isinf)(float __x) { return isinf(__x); }
+    inline bool (isless)(float __x, float __y) { return isless(__x, __y); }
+    inline bool (islessequal)(float __x, float __y) { return islessequal(__x, __y); }
+    inline bool (islessgreater)(float __x, float __y) { return islessgreater(__x, __y); }
+    inline bool (isnan)(float __x) { return isnan(__x); }
+    inline bool (isnormal)(float __x) { return isnormal(__x); }
+    inline bool (isunordered)(float __x, float __y) { return isunordered(__x, __y); }
+
 #ifdef __HAVE_LONGDOUBLE
     inline long double acosh(long double __x) { return acoshl(__x); }
     inline long double asinh(long double __x) { return asinhl(__x); }
@@ -1026,7 +1055,31 @@ _ARMDEFLD1(trunc);
     inline _ARMABI_FPEXCEPT long double round(long double __x) { return roundl(__x); }
     inline long double tgamma(long double __x) { return tgammal(__x); }
     inline _ARMABI_FPEXCEPT long double trunc(long double __x) { return truncl(__x); }
+    inline int (fpclassify)(long double __x) { return fpclassify(__x); }
+    inline bool (isfinite)(long double __x) { return isfinite(__x); }
+    inline bool (isgreater)(long double __x, long double __y) { return isgreater(__x, __y); }
+    inline bool (isgreaterequal)(long double __x, long double __y) { return isgreaterequal(__x, __y); }
+    inline bool (isinf)(long double __x) { return isinf(__x); }
+    inline bool (isless)(long double __x, long double __y) { return isless(__x, __y); }
+    inline bool (islessequal)(long double __x, long double __y) { return islessequal(__x, __y); }
+    inline bool (islessgreater)(long double __x, long double __y) { return islessgreater(__x, __y); }
+    inline bool (isnan)(long double __x) { return isnan(__x); }
+    inline bool (isnormal)(long double __x) { return isnormal(__x); }
+    inline bool (isunordered)(long double __x, long double __y) { return isunordered(__x, __y); }
 #endif
+
+#undef fpclassify
+#undef isfinite
+#undef isgreater
+#undef isgreaterequal
+#undef isinf
+#undef isless
+#undef islessequal
+#undef islessgreater
+#undef isnan
+#undef isnormal
+#undef isunordered
+
 #endif
 
   }
@@ -1044,7 +1097,9 @@ _ARMDEFLD1(trunc);
 
   #if defined(__cplusplus) && !defined(__MATH_NO_EXPORTS)
     using ::std::__use_accurate_range_reduction;
-    using ::std::abs;
+    #ifndef __ARMCOMPILER_LIBCXX
+      using ::std::abs;
+    #endif
     using ::std::acos;
     using ::std::asin;
     using ::std::atan2;
@@ -1175,13 +1230,11 @@ _ARMDEFLD1(trunc);
       using ::std::remainderl;
       using ::std::rintf;
       using ::std::rintl;
-    #endif
-    #if !defined(__STRICT_ANSI__) || defined(__USE_C99_MATH)
-      /* C99 additions which appear in C99 or non-strict mode */
+      /* New in C99. */
       using ::std::float_t;
       using ::std::double_t;
     #endif
-    #ifdef __USE_C99_MATH
+    #if (defined(__clang__) && !defined(__STRICT_ANSI)) || defined(__USE_C99_MATH)
       /* Functions new in C99. */
       using ::std::exp2;
       using ::std::exp2f;
@@ -1245,6 +1298,20 @@ _ARMDEFLD1(trunc);
       using ::std::trunc;
       using ::std::truncf;
       using ::std::truncl;
+    #endif
+
+    #if !defined(__STRICT_ANSI__) || defined(__USE_C99_MATH)
+      using ::std::fpclassify;
+      using ::std::isfinite;
+      using ::std::isgreater;
+      using ::std::isgreaterequal;
+      using ::std::isinf;
+      using ::std::isless;
+      using ::std::islessequal;
+      using ::std::islessgreater;
+      using ::std::isnan;
+      using ::std::isnormal;
+      using ::std::isunordered;
     #endif
   #endif
 

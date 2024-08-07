@@ -2,8 +2,8 @@
 
 /* Copyright (C) ARM Ltd., 1999
  * All rights reserved
- * RCS $Revision: 179217 $
- * Checkin $Date: 2013-03-12 14:03:19 +0000 (Tue, 12 Mar 2013) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: drodgman $
  */
 
@@ -19,7 +19,7 @@
 
 #ifndef __setjmp_h
 #define __setjmp_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 /*
  * Depending on compiler version __int64 or __INT64_TYPE__ should be defined.
@@ -51,7 +51,11 @@
 #if _AEABI_PORTABILITY_LEVEL != 0 || (!defined _AEABI_PORTABILITY_LEVEL && __DEFAULT_AEABI_PORTABILITY_LEVEL != 0)
 typedef __int64 jmp_buf[];      /* do not specify size at all */
 #else
-typedef __int64 jmp_buf[48];    /* size as defined in the ATEPCS */
+  #ifdef __TARGET_ARCH_AARCH64
+    typedef __int64 jmp_buf[48];
+  #else
+    typedef __int64 jmp_buf[20];    /* size as defined in the ATEPCS */
+  #endif
                             /* an array type suitable for holding the data */
                             /* needed to restore a calling environment.    */
 #endif

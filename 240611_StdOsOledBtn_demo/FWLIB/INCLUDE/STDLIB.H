@@ -2,8 +2,8 @@
 /* Copyright (C) Codemist Ltd., 1988-1993.                          */
 /* Copyright 1991-1998,2014 ARM Limited. All rights reserved.       */
 /*
- * RCS $Revision: 185525 $
- * Checkin $Date: 2014-05-29 12:44:48 +0100 (Thu, 29 May 2014) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: agrant $
  */
  
@@ -14,7 +14,7 @@
 
 #ifndef __stdlib_h
 #define __stdlib_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 #if defined(__clang__) || (defined(__ARMCC_VERSION) && !defined(__STRICT_ANSI__))
   /* armclang and non-strict armcc allow 'long long' in system headers */
@@ -37,7 +37,7 @@
    * you can use -D__USE_C99_STDLIB (or -D__USE_C99ALL).
    */
   #ifndef __USE_C99_STDLIB
-    #if defined(__USE_C99_ALL) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+    #if defined(__USE_C99_ALL) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
       #define __USE_C99_STDLIB 1
     #endif
   #endif

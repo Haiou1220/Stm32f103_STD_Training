@@ -4,14 +4,14 @@
 /* version 1 */
 
 /*
- * RCS $Revision: 179217 $
- * Checkin $Date: 2013-03-12 14:03:19 +0000 (Tue, 12 Mar 2013) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: drodgman $
  */
 
 #ifndef __errno_h
 #define __errno_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 #define _ARMABI_PURE __declspec(__nothrow) __attribute__((const))
 

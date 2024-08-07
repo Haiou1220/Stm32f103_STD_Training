@@ -3,8 +3,8 @@
 /* Copyright 1991-1998 ARM Limited. All rights reserved.        */
 
 /*
- * RCS $Revision: 185531 $
- * Checkin $Date: 2014-05-29 15:16:06 +0100 (Thu, 29 May 2014) $
+ * RCS $Revision$
+ * Checkin $Date$
  * Revising $Author: sdouglas $
  */
 
@@ -17,7 +17,7 @@
 
 #ifndef __stdio_h
 #define __stdio_h
-#define __ARMCLIB_VERSION 5050106
+#define __ARMCLIB_VERSION 5060044
 
 /*
  * Depending on compiler version __int64 or __INT64_TYPE__ should be defined.
@@ -430,7 +430,12 @@ extern _ARMABI int _sprintf(char * __restrict /*s*/, const char * __restrict /*f
     * You can use instead of sprintf to improve code size.
     * Returns: as sprintf.
     */
-#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+
+#pragma __printf_args
+extern _ARMABI int __ARM_snprintf(char * __restrict /*s*/, size_t /*n*/,
+                     const char * __restrict /*format*/, ...) __attribute__((__nonnull__(3)));
+
+#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
 #pragma __printf_args
 extern _ARMABI int snprintf(char * __restrict /*s*/, size_t /*n*/,
                      const char * __restrict /*format*/, ...) __attribute__((__nonnull__(3)));
@@ -541,7 +546,7 @@ extern _ARMABI int _sscanf(const char * __restrict /*s*/,
     * You can use instead of sscanf to improve code size.
     * Returns: as sscanf.
     */
-#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
 /* C99 additions */
 extern _ARMABI int vfscanf(FILE * __restrict /*stream*/, const char * __restrict /*format*/, __va_list) __attribute__((__nonnull__(1,2)));
 extern _ARMABI int vscanf(const char * __restrict /*format*/, __va_list) __attribute__((__nonnull__(1)));
@@ -550,6 +555,7 @@ extern _ARMABI int vsscanf(const char * __restrict /*s*/, const char * __restric
 extern _ARMABI int _vfscanf(FILE * __restrict /*stream*/, const char * __restrict /*format*/, __va_list) __attribute__((__nonnull__(1,2)));
 extern _ARMABI int _vscanf(const char * __restrict /*format*/, __va_list) __attribute__((__nonnull__(1)));
 extern _ARMABI int _vsscanf(const char * __restrict /*s*/, const char * __restrict /*format*/, __va_list) __attribute__((__nonnull__(1,2)));
+extern _ARMABI int __ARM_vsscanf(const char * __restrict /*s*/, const char * __restrict /*format*/, __va_list) __attribute__((__nonnull__(1,2)));
 
 extern _ARMABI int vprintf(const char * __restrict /*format*/, __va_list /*arg*/) __attribute__((__nonnull__(1)));
    /*
@@ -585,7 +591,9 @@ extern _ARMABI int vsprintf(char * __restrict /*s*/,
     * Returns: the number of characters written in the array, not counting the
     *          terminating null character.
     */
-#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+extern _ARMABI int __ARM_vsnprintf(char * __restrict /*s*/, size_t /*n*/,
+                     const char * __restrict /*format*/, __va_list /*arg*/) __attribute__((__nonnull__(3)));
+#if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
 extern _ARMABI int vsnprintf(char * __restrict /*s*/, size_t /*n*/,
                      const char * __restrict /*format*/, __va_list /*arg*/) __attribute__((__nonnull__(3)));
    /*
@@ -619,6 +627,25 @@ extern _ARMABI int _vsnprintf(char * __restrict /*s*/, size_t /*n*/,
     * You can use instead of vsnprintf to improve code size.
     * Returns: as vsnprintf.
     */
+#if !defined(__STRICT_ANSI__)
+#pragma __printf_args
+extern _ARMABI int asprintf(char ** /*strp*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(2)));
+extern _ARMABI int vasprintf(char ** /*strp*/, const char * __restrict /*format*/, __va_list /*arg*/) __attribute__((__nonnull__(2)));
+#endif
+#pragma __printf_args
+extern _ARMABI int __ARM_asprintf(char ** /*strp*/, const char * __restrict /*format*/, ...) __attribute__((__nonnull__(2)));
+extern _ARMABI int __ARM_vasprintf(char ** /*strp*/, const char * __restrict /*format*/, __va_list /*arg*/) __attribute__((__nonnull__(2)));
+   /*
+    * dynamically allocates a buffer of the right size for the
+    * formatted string, and returns it in (*strp). Formal return value
+    * is the same as any other printf variant, except that it returns
+    * -1 if the buffer could not be allocated.
+    *
+    * (The functions with __ARM_ prefixed names are identical to the
+    * ones without, but are available in all compilation modes without
+    * violating user namespace.)
+    */
+
 extern _ARMABI int fgetc(FILE * /*stream*/) __attribute__((__nonnull__(1)));
    /*
     * obtains the next character (if present) as an unsigned char converted to
@@ -931,7 +958,7 @@ extern _ARMABI void __use_no_semihosting(void);
     using ::std::_printf;
     using ::std::sprintf;
     using ::std::_sprintf;
-    #if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__)
+    #if !defined(__STRICT_ANSI__) || (defined(__STDC_VERSION__) && 199901L <= __STDC_VERSION__) || (defined(__cplusplus) && 201103L <= __cplusplus)
       using ::std::snprintf;
       using ::std::vsnprintf;
       using ::std::vfscanf;
@@ -940,6 +967,15 @@ extern _ARMABI void __use_no_semihosting(void);
     #endif
     using ::std::_snprintf;
     using ::std::_vsnprintf;
+#if !defined(__STRICT_ANSI__)
+    using ::std::asprintf;
+    using ::std::vasprintf;
+#endif
+    using ::std::__ARM_asprintf;
+    using ::std::__ARM_vasprintf;
+    using ::std::__ARM_vsnprintf;
+    using ::std::__ARM_snprintf;
+    using ::std::__ARM_vsscanf;
     using ::std::fscanf;
     using ::std::_fscanf;
     using ::std::scanf;
