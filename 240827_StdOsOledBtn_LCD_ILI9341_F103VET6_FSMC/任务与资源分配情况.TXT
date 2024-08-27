@@ -1,0 +1,35 @@
+任务:
+//oled_task,(有冲突)
+led_task,
+usart1_task,
+key_task,
+st7796_task,
+
+资源分配
+key模块:
+   PB0  
+led模块:
+    PC0 //开发板F103VET6
+oled模块:	
+    PB6 ------> I2C1_SCL
+    PB7 ------> I2C1_SDA	
+usart1模块:
+   pa9  --> tx
+   pa10 -->  rx
+
+st7796_fsmc_lcd模块:
+ 
+    
+    BL =>LCD_BL_PD12  =>TIM4_CH1_pwm
+    RST =>LCD_RST_PC2 =>gpio_pc2
+ 
+    CS  => FSMC_NE1_PD7 =>FSMC_NE1
+    RS =>FSMC_RS_PD11 =>FSMC_A16
+
+
+    D0~D15 =>FSMC_D15~FSMC_D0
+    WR =>FSMC_NWE
+    RD =>FSMC_NOE
+
+
+
